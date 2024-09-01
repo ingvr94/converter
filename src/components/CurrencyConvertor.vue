@@ -28,6 +28,7 @@
             <label class="converter__label" for="amount">Количество:</label>
             <input
             v-model="store.state.amount"
+            v-on:keypress="numbersOnly"
             class="converter__amount" 
             type="number" 
             name="amount" 
@@ -47,6 +48,16 @@
     import { ref, onMounted, computed, watchEffect } from "vue";
     import { useStore } from "vuex";
     const store=useStore()
+
+    const numbersOnly=(evt)=>{
+    evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    }
 
 
     onMounted(()=>{
